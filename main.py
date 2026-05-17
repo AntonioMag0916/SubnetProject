@@ -1,13 +1,12 @@
+import helper as help
 import math as m
-import helper
 
 #Subnet Calculator
 #Made by Antonio Magnani 5/17/26
 
 #Variable intialization
 
-finalIp = [0, 0, 0, 0]
-finalMask = [0, 0, 0, 0]
+
 
 subnetMask = int(input("What is your subnet mask?: "))
 
@@ -17,16 +16,14 @@ hostBits = 8 - networkBits
 
 
 
-for i in range(0, 4):
-    if ((i + 1) <= fullBytes):
-        finalMask[i] = 255
-    else:
-        finalMask[i] = helper.calculateByte(networkBits)
-    print(finalMask[i])
-
-maskString = ".".join(map(str, finalMask))
-
+maskString = help.calculateMask(fullBytes, networkBits)
 print(maskString)
+
+    
+    
+
+
+#print(maskString)
 
 
 
@@ -49,6 +46,13 @@ print(maskString)
 print(f"Full bytes: {fullBytes}")
 print(f"Host bits: {hostBits}")
 print(f"Network bits: {networkBits}")
+
+full bytes = 2 
+1 2 STOP FIN
+0 1 STOP FIN
+
+full bytes = 3
+1 2 3 STOP
 
 
 """
