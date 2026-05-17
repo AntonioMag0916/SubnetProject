@@ -21,9 +21,12 @@ for i in range(0, 4):
     if ((i + 1) <= fullBytes):
         finalMask[i] = 255
     else:
-        calculateByte(networkBits)
+        finalMask[i] = helper.calculateByte(networkBits)
+    print(finalMask[i])
 
+maskString = ".".join(map(str, finalMask))
 
+print(maskString)
 
 
 
@@ -43,9 +46,9 @@ for i in range(0, 4):
 30 / 8 = 3.1 
 
 30 % 8 = 2 (two host bits) 
-
 print(f"Full bytes: {fullBytes}")
 print(f"Host bits: {hostBits}")
 print(f"Network bits: {networkBits}")
+
 
 """
