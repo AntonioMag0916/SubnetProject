@@ -4,7 +4,6 @@ import math as m
 bitValues = [128, 64, 32, 16, 8, 4, 2, 1]
 
 finalIp = [0, 0, 0, 0]
-finalMask = [0, 0, 0, 0]
 
 
 
@@ -16,7 +15,7 @@ def calculateByte(bits):
 
 
 def calculateMask(fullBytes, networkBits):
-    resetMask()
+    finalMask = [0, 0, 0, 0]
     
     if (fullBytes != 0):
         for i in range(0, fullBytes):
@@ -30,6 +29,3 @@ def calculateMask(fullBytes, networkBits):
     return ".".join(map(str, finalMask))
 
 
-def resetMask():
-    for i in range(0, 4):
-        finalMask[i] = 0
