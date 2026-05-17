@@ -1,10 +1,10 @@
 import math as m
+import helper
 
 #Subnet Calculator
 #Made by Antonio Magnani 5/17/26
 
 #Variable intialization
-bitValues = [128, 64, 32, 16, 8, 4, 2, 1]
 
 finalIp = [0, 0, 0, 0]
 finalMask = [0, 0, 0, 0]
@@ -17,8 +17,17 @@ hostBits = 8 - networkBits
 
 
 
-for i in range(0, 3):
-    print(i)
+for i in range(0, 4):
+    if ((i + 1) <= fullBytes):
+        finalMask[i] = 255
+    else:
+        calculateByte(networkBits)
+
+
+
+
+
+
 
 #User input for ip and subnet mask
 #User input validation
