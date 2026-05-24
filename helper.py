@@ -1,4 +1,6 @@
 import math as m
+import ipaddress as ipMan
+
 
 #Left to right calculation
 bitValues = [128, 64, 32, 16, 8, 4, 2, 1]
@@ -18,6 +20,27 @@ def calculateByte(bits):
 -Range of hosts
 -Broadcast
 """
+
+def calculateNetworkAddr(ip, subnet):
+    
+    
+    newIp = ipMan.ip_address(ip)
+    newMask = ipMan.ip_address(subnet)
+
+    networkAddr = ipMan.ip_address(int(newIp) & int(newMask))
+
+def calculateHosts(ip, subnetMask):
+
+    hostBits = 32 - int(subnetMask)
+    usableHosts = 2 ** hostBits - 2
+
+    if (usableHosts <= 0):
+        print("No useable hosts!")
+        return 0
+    else:
+        return usableHosts
+    
+
 
 
 def calculateMask(fullBytes, networkBits):

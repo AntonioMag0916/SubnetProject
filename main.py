@@ -1,10 +1,23 @@
 import helper as help
 import math as m
 import re
+import sys
 
+print(sys.version)
 #Subnet Calculator
 #Made by Antonio Magnani 5/17/26
 
+
+subnetMask = input("What is your subnet mask? (Ex: /32 or 32): ")
+
+
+while (True):
+    if (not re.search(r"^[\/]?(3[0-2]|[12]?\d)$", subnetMask)):
+        print("Must be in the format /##, ##, or must be in range of 0-32")
+        subnetMask = input("What is your subnet mask? (Ex: /32 or 32): ")
+    else:
+        cleanSubnetMask = int(re.sub(r"\/", "", subnetMask)) #Or int(subnetmask.lstrip(\/))
+        break
 
 
 ipAddr = input("What is your ip address?: ")
@@ -15,36 +28,30 @@ ipPat = rf"^{octet}\.{octet}\.{octet}\.{octet}$"
 
 while (True):
     if(not re.search(ipPat, ipAddr)):
+        
+        
         print("Ip must be in the format ###.###.###.###, do not have leading 0s")
         ipAddr = input("What is your ip address?: ")
     else:
-        break
 
-
-subnetMask = input("What is your subnet mask? (Ex: /32 or 32): ")
-
-while (True):
-    if (not re.search(r"^[\/]?(3[0-2]|[12]?\d)$", subnetMask)):
-        print("Must be in the format /##, ##, or must be in range of 0-32")
-        subnetMask = input("What is your subnet mask? (Ex: /32 or 32): ")
-    else:
-        subnetMask = int(re.sub(r"\/", "", subnetMask)) #Or int(subnetmask.lstrip(\/))
+        #this is where we further validate as in checking if the supposed subnet mask makes sense for the ip
         break
 
 
 
-
-fullBytes = m.floor(subnetMask / 8)
-networkBits = subnetMask % 8
+fullBytes = m.floor(cleanSubnetMask / 8)
+networkBits = cleanSubnetMask % 8
 hostBits = 8 - networkBits
 
 
 
 maskString = help.calculateMask(fullBytes, networkBits)
-print(maskString)
+networkAddr = help.calculateNetworkAddr(ipAddr, maskString)
+usableHosts = help.calculateHosts(ipAddr, cleanSubnetMask)
 
-    
-    
+print(f"Network Mask for {subnetMask} is <{maskString}>.")
+print(f"The network address of {ipAddr} is {networkAddr}.")
+print(f"The amount of usable hosts are {usableHosts}.")
 
 
 #print(maskString)
