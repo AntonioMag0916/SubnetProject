@@ -13,6 +13,12 @@ def calculateByte(bits):
         sum += bitValues[i]
     return sum
 
+"""
+-Network Addr
+-Range of hosts
+-Broadcast
+"""
+
 
 def calculateMask(fullBytes, networkBits):
     finalMask = [0, 0, 0, 0]

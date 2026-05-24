@@ -1,14 +1,38 @@
 import helper as help
 import math as m
+import re
 
 #Subnet Calculator
 #Made by Antonio Magnani 5/17/26
 
-#Variable intialization
+
+
+ipAddr = input("What is your ip address?: ")
+
+
+octet = r"(25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)"
+ipPat = rf"^{octet}\.{octet}\.{octet}\.{octet}$"
+
+while (True):
+    if(not re.search(ipPat, ipAddr)):
+        print("Ip must be in the format ###.###.###.###, do not have leading 0s")
+        ipAddr = input("What is your ip address?: ")
+    else:
+        break
+
+
+subnetMask = input("What is your subnet mask? (Ex: /32 or 32): ")
+
+while (True):
+    if (not re.search(r"^[\/]?(3[0-2]|[12]?\d)$", subnetMask)):
+        print("Must be in the format /##, ##, or must be in range of 0-32")
+        subnetMask = input("What is your subnet mask? (Ex: /32 or 32): ")
+    else:
+        subnetMask = int(re.sub(r"\/", "", subnetMask)) #Or int(subnetmask.lstrip(\/))
+        break
 
 
 
-subnetMask = int(input("What is your subnet mask?: "))
 
 fullBytes = m.floor(subnetMask / 8)
 networkBits = subnetMask % 8
