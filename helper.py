@@ -23,11 +23,12 @@ def calculateByte(bits):
 
 def calculateNetworkAddr(ip, subnet):
     
-    
     newIp = ipMan.ip_address(ip)
     newMask = ipMan.ip_address(subnet)
 
     networkAddr = ipMan.ip_address(int(newIp) & int(newMask))
+
+    return networkAddr
 
 def calculateHosts(ip, subnetMask):
 
